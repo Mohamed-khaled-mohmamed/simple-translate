@@ -1,134 +1,280 @@
-import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 
-// Remember to rename these classes and interfaces!
 
-interface MyPluginSettings {
-	mySetting: string;
+
+import { Plugin, Notice } from "obsidian";
+
+
+let translationElementCreated = false; 
+function removeCreatedElements() {
+    // تحديد وإزالة جميع العناصر التي تم إنشاؤها مسبقًا
+    const elements = document.querySelectorAll("div[data-created='true']");
+    elements.forEach(element => {
+        element.parentNode.removeChild(element);
+    });
+    translationElementCreated = false;
+
+
+
 }
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
-}
+export default class ExamplePlugin extends Plugin {
+    onload() {
+        // إضافة عنصر لشريط الحالة
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
 
-	async onload() {
-		await this.loadSettings();
 
-		// This creates an icon in the left ribbon.
-		const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
-			// Called when the user clicks the icon.
-			new Notice('This is a notice!');
-		});
-		// Perform additional things with the ribbon
-		ribbonIconEl.addClass('my-plugin-ribbon-class');
 
-		// This adds a status bar item to the bottom of the app. Does not work on mobile apps.
-		const statusBarItemEl = this.addStatusBarItem();
-		statusBarItemEl.setText('Status Bar Text');
+        let languages = [
+            { name: "العربية", code: "ar" },
+            { name: "English", code: "en" },
+            { name: "中文", code: "zh" },
+            { name: "Français", code: "fr" },
+            { name: "Español", code: "es" },
+            { name: "Português", code: "pt" },
+            { name: "Русский", code: "ru" },
+            { name: "Deutsch", code: "de" },
+            { name: "日本語", code: "ja" },
+            { name: "हिन्दी", code: "hi" },
+            { name: "Italiano", code: "it" },
+            { name: "한국어", code: "ko" },
+            { name: "Türkçe", code: "tr" },
+            { name: "Nederlands", code: "nl" },
+            { name: "Polski", code: "pl" },
+            { name: "Bahasa Indonesia", code: "id" },
+            { name: "ไทย", code: "th" },
+            { name: "Tiếng Việt", code: "vi" },
+            { name: "Ελληνικά", code: "el" },
+            { name: "Svenska", code: "sv" },
+            // القائمة تحتوي على 80 لغة أخرى ، يمكنك إضافتها هنا.
+            { name: "Afrikaans", code: "af" },
+            { name: "Azərbaycanca", code: "az" },
+            { name: "বাংলা", code: "bn" },
+            { name: "Български", code: "bg" },
+            { name: "Català", code: "ca" },
+            { name: "Čeština", code: "cs" },
+            { name: "Dansk", code: "da" },
+            { name: "Eesti", code: "et" },
+            { name: "Filipino", code: "tl" },
+            { name: "Suomi", code: "fi" },
+            { name: "Gaeilge", code: "ga" },
+            { name: "ગુજરાતી", code: "gu" },
+            { name: "Hrvatski", code: "hr" },
+            { name: "Magyar", code: "hu" },
+            { name: "Íslenska", code: "is" },
+            { name: "ಕನ್ನಡ", code: "kn" },
+            { name: "Қазақ", code: "kk" },
+            { name: "ខ្មែរ", code: "km" },
+            { name: "한국어", code: "ko" },
+            { name: "Kurdî", code: "ku" },
+            { name: "ລາວ", code: "lo" },
+            { name: "Latviešu", code: "lv" },
+            { name: "Lietuvių", code: "lt" },
+            { name: "македонски", code: "mk" },
+            { name: "മലയാളം", code: "ml" },
+            { name: "मराठी", code: "mr" },
+            { name: "Монгол", code: "mn" },
+            { name: "မြန်မာ", code: "my" },
+            { name: "नेपाली", code: "ne" },
+            { name: "Norsk", code: "no" },
+            { name: "فارسی", code: "fa" },
+            { name: "ਪੰਜਾਬੀ", code: "pa" },
+            { name: "Română", code: "ro" },
+            { name: "සිංහල", code: "si" },
+            { name: "Slovenčina", code: "sk" },
+            { name: "Slovenščina", code: "sl" },
+            { name: "Sesotho", code: "st" },
+            { name: "Српски", code: "sr" },
+            { name: "தமிழ்", code: "ta" },
+            { name: "తెలుగు", code: "te" },
+            { name: "ကညီကျိာ်", code: "tg" },
+            { name: "ไทย", code: "th" },
+            { name: "မြန်မာ", code: "my" },
+            { name: "Тоҷикӣ", code: "tg" },
+            { name: "Türkmen", code: "tk" },
+            { name: "Українська", code: "uk" },
+            { name: "اردو", code: "ur" },
+            { name: "Oʻzbekcha", code: "uz" },
+            { name: "Cymraeg", code: "cy" },
+            { name: "isiXhosa", code: "xh" },
+            { name: "ייִדיש", code: "yi" },
+            { name: "Yorùbá", code: "yo" },
+            { name: "Zulu", code: "zu" }
+        ];
 
-		// This adds a simple command that can be triggered anywhere
-		this.addCommand({
-			id: 'open-sample-modal-simple',
-			name: 'Open sample modal (simple)',
-			callback: () => {
-				new SampleModal(this.app).open();
+        // إنشاء عنصر select
+        let langlist = this.addStatusBarItem().createEl("select");
+
+        // إضافة خيارات اللغات إلى العنصر select
+        languages.forEach(lang => {
+            let option = document.createElement("option");
+            option.text = lang.name;
+            option.value = lang.code;
+            langlist.appendChild(option);
+        });
+
+	//My ==============================================
+
+
+
+        this.statusBarElement = this.addStatusBarItem().createEl("button");
+		this.statusBarElement.classList.add("btTranslate")
+		const btnTranslate= document.querySelector('.btTranslate');
+		// btnTranslate.style.backgroundColor = "green";
+		btnTranslate?.classList.add("background-green");
+
+
+        let isTranslationEnabled = true; // تعيين المتغير لتتبع حالة الترجمة
+
+
+
+        this.statusBarElement.textContent = isTranslationEnabled ?"on"  : "off";
+
+
+
+
+	//==============================================
+        // تبديل حالة الترجمة عند النقر على الزر
+        this.statusBarElement.addEventListener("click", () => {
+            isTranslationEnabled = !isTranslationEnabled;
+            this.statusBarElement.textContent = isTranslationEnabled ? "on" : "off";
+			btnTranslate?.classList.add("background-green");
+
+            const message = isTranslationEnabled ? "simple-translate start" : "simple-translate stop";
+            new Notice(message);
+			if (btnTranslate.textContent === "on"){
+				btnTranslate?.classList.add("background-green");
+				btnTranslate?.classList.remove("background-red");
+				// btnTranslate.style.backgroundColor = "green";
 			}
-		});
-		// This adds an editor command that can perform some operation on the current editor instance
-		this.addCommand({
-			id: 'sample-editor-command',
-			name: 'Sample editor command',
-			editorCallback: (editor: Editor, view: MarkdownView) => {
-				console.log(editor.getSelection());
-				editor.replaceSelection('Sample Editor Command');
+			else{
+				btnTranslate?.classList.remove("background-green");
+				btnTranslate?.classList.add("background-red");
 			}
-		});
-		// This adds a complex command that can check whether the current state of the app allows execution of the command
-		this.addCommand({
-			id: 'open-sample-modal-complex',
-			name: 'Open sample modal (complex)',
-			checkCallback: (checking: boolean) => {
-				// Conditions to check
-				const markdownView = this.app.workspace.getActiveViewOfType(MarkdownView);
-				if (markdownView) {
-					// If checking is true, we're simply "checking" if the command can be run.
-					// If checking is false, then we want to actually perform the operation.
-					if (!checking) {
-						new SampleModal(this.app).open();
-					}
+			
+        });
 
-					// This command will only show up in Command Palette when the check function returns true
-					return true;
-				}
-			}
-		});
 
-		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
 
-		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
-		// Using this function will automatically remove the event listener when this plugin is disabled.
-		this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
-			console.log('click', evt);
-		});
 
-		// When registering intervals, this function will automatically clear the interval when the plugin is disabled.
-		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
-	}
 
-	onunload() {
+		///========================================
 
-	}
+        let isTranslationInProgress = false; // متغير لتتبع حالة الترجمة
 
-	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	}
 
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
+		// translat srver and grnerat text===============================================
+        this.registerDomEvent(document, "mouseup", handleTranslation);
+
+
+        function handleTranslation(e) {
+            if(translationElementCreated)return
+            if (!isTranslationInProgress && isTranslationEnabled) { // التأكد من أن الترجمة لم تبدأ بالفعل
+                const selection = window.getSelection();
+
+                if (selection && selection.toString().trim() !== '') {
+                    const translate = require('translate-google');
+                    const range = selection.getRangeAt(0);
+                    const rect = range.getBoundingClientRect();
+
+                    const mouseX = e.clientX;
+                    const mouseY = e.clientY;
+                    const selectionX = rect.left;
+                    const selectionY = rect.top;
+
+                    // بدء الترجمة وتعيين المتغير إلى true
+                    isTranslationInProgress = true;
+
+                    // ترجمة النص المحدد
+                    translate(selection.toString(), { to: langlist.value })
+                        .then(res => {
+                            // إنشاء وعرض عنصر جديد للترجمة
+                            renderTranslation(res, mouseX, mouseY, selectionX, selectionY);
+                            // انتهاء الترجمة وتعيين المتغير إلى false
+                            isTranslationInProgress = false;
+                            return
+
+
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            new Notice("Translation failed. Please try again.");
+                            // في حالة حدوث خطأ، يجب تعيين المتغير إلى false هنا أيضًا
+                            isTranslationInProgress = false;
+                        });
+                }
+            }
+        }
+
+
+
+        // استدعاء الدالة لإزالة العناصر المنشأة مسبقًا عند النقر
+        window.addEventListener('click', removeCreatedElements);
+    }
 }
 
-class SampleModal extends Modal {
-	constructor(app: App) {
-		super(app);
-	}
 
-	onOpen() {
-		const {contentEl} = this;
-		contentEl.setText('Woah!');
-	}
 
-	onClose() {
-		const {contentEl} = this;
-		contentEl.empty();
-	}
-}
+function renderTranslation(text, mouseX, mouseY, selectionX) {
 
-class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+    const translationElement = document.createElement("div");
+    translationElement.textContent = text;
+    translationElement.setAttribute("data-created", "true");
 
-	constructor(app: App, plugin: MyPlugin) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
+    translationElement.classList.add("translation-element", "padding", "font-Arial", "font-size-18px", "background-lightblue", "color", "direction-rtl", "max-width-500px", "z-index");
 
-	display(): void {
-		const {containerEl} = this;
+    translationElement.style.position = "absolute";
+    translationElement.style.margin = "auto";
+    translationElement.style.top = mouseY + 20 + "px";
+    translationElement.style.left = selectionX + "px";
 
-		containerEl.empty();
+    document.body.appendChild(translationElement);
 
-		new Setting(containerEl)
-			.setName('Setting #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue(this.plugin.settings.mySetting)
-				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
-					await this.plugin.saveSettings();
-				}));
-	}
+    translationElementCreated = true;
+
+    // Drag functionality
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    translationElement.addEventListener("mousedown", startDrag);
+    translationElement.addEventListener("mousemove", drag);
+    translationElement.addEventListener("mouseup", endDrag);
+    translationElement.addEventListener("mouseleave", endDrag);
+
+    function startDrag(e) {
+        isDragging = true;
+        offsetX = e.clientX - translationElement.getBoundingClientRect().left;
+        offsetY = e.clientY - translationElement.getBoundingClientRect().top;
+    }
+
+    function drag(e) {
+        if (isDragging) {
+            translationElement.style.left = e.clientX - offsetX + "px";
+            translationElement.style.top = e.clientY - offsetY + "px";
+        }
+    }
+
+    function endDrag(e) {
+        isDragging = false;
+    }
+
+    translationElement.addEventListener("click", handleClick);
+
+    function handleClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    // Copy functionality
+    translationElement.addEventListener("contextmenu", copyText);
+
+    function copyText(e) {
+        e.preventDefault();
+        const textToCopy = translationElement.textContent;
+        navigator.clipboard.writeText(textToCopy).then(function() {
+			new Notice('Text copied to clipboard')
+        }, function(err) {
+            new Notice('Unable to copy text to clipboard: ', err);
+        });
+    }
+
 }

@@ -1,0 +1,11 @@
+{
+	"id": "e",
+	"name": "Simple-translat",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "sample translat plugin",
+	"author": "mohamed khaled",
+	"authorUrl": "https://obsidian.md",
+	"fundingUrl": "https://obsidian.md/pricing",
+	"isDesktopOnly": false
+}

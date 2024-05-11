@@ -1,0 +1,12 @@
+{
+    "id": "simple-translate",
+    "name": "Simple-translate",
+    "version": "1.1.0-beta",
+    "minAppVersion": "0.15.0",
+    "description": "Sample translate plugin for beta testing",
+    "author": "Mohamed Khaled",
+    "authorUrl": "https://github.com/Mohamed-khaled-mohmamed/Mohamed-khaled-mohamed",
+   
+    "isDesktopOnly": false
+}
+

@@ -6,3 +6,193 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+
+
+:root {
+	--position-absolute: absolute;
+	--font-family: Arial, sans-serif;
+	--font-size: 18px;
+	--background-lightblue: lightblue;
+	--background-green:#008000;
+	--background-red:#ff0000;
+	--color:#080808;
+	--direction-rtl: rtl;
+	--max-width: 500px;
+	--z-index: 1000000000;
+	--lang: ar;
+	/* اللغة الافتراضية هي العربية */
+
+}
+
+
+.translation-element {
+	position: var(--position-absolute);
+	font-family: var(--font-family);
+	font-size: var(--font-size);
+	background-color: var(--background-lightblue);
+	direction: var(--direction-rtl);
+	max-width: var(--max-width);
+	z-index: var(--z-index);
+}
+
+
+/*
+
+.translation-element {
+    position: absolute;
+}
+
+.font-Arial {
+    font-family: Arial, sans-serif;
+}
+
+.font-size-18px {
+    font-size: 18px;
+}
+
+.background-lightblue {
+    background-color: lightblue;
+}
+
+.direction-rtl {
+    direction: rtl;
+}
+
+.max-width-500px {
+    max-width: 500px;
+}
+
+.z-index-1000000000 {
+    z-index: 100000000;
+}
+
+
+*/
+
+
+
+
+/* ===================== */
+
+
+.translation-element {
+	position: var(--position-absolute);
+}
+.padding {
+	padding: 5px;
+}
+
+.font-Arial {
+	font-family: var(--font-family);
+}
+
+.font-size-18px {
+	font-size: var(--font-size);
+}
+
+
+.background-lightblue {
+	background-color: var(--background-lightblue);
+}
+.background-red{
+	background-color: var(--background-red)!important;
+}
+.background-green{
+	background-color: var(--background-green) !important;
+}
+.color{
+	color: var(--color);
+}
+.direction-rtl {
+	direction: var(--direction-rtl);
+}
+
+.max-width-500px {
+	max-width: var(--max-width);
+}
+
+.z-index {
+	z-index: var(--z-index);
+}
+
+
+
+
+
+
+/* ================================ */
+
+/* @settings
+name: simple-translate
+id: my-css-settings
+settings:
+    - 
+        id: font-family
+        title: Font Family Arial
+        description: Sets the font family to Arial, sans-serif
+        type: variable-select
+        default: Arial, sans-serif
+        options:
+            - Arial, sans-serif
+            - Times New Roman, Times, serif
+            - Georgia, serif
+    - 
+        id: font-size
+        title: Font Size 
+        description: Sets the font size to 18px
+        type: variable-number
+        default: 18
+        format: px
+    - 
+        id: background-lightblue
+        title: Background Lightblue
+        description: Sets the background color to lightblue
+        type: variable-color
+        format: hex
+        default: '#add8e6'
+    - 
+        id: background-red
+        title: Background of btn when it is off
+        description: Sets the background color to red
+        type: variable-color
+        format: hex
+        default: '#ff0000'
+    - 
+        id: background-green
+        title: Background of btn when it is on
+        description: Sets the background color to green
+        type: variable-color
+        format: hex
+        default: '#008000'
+    - 
+        id: color
+        title: change color
+        description: Sets the  color to what you want
+        type: variable-color
+		format: hex
+		default: '#080808'
+    - 
+        id: direction-rtl
+        title: Direction RTL
+        description: Sets the text direction to right-to-left
+        type: variable-select
+		default: rtl
+        options:
+            - rtl
+            - ltr
+    - 
+        id: max-width
+        title: Max Width 500px
+        description: Sets the maximum width to 500px
+        type: variable-number
+        default: 500
+        format: px
+    - 
+        id: z-index
+        title: Z Index 
+        description: Sets the z-index to 1000000000
+        type: variable-number
+        default: 1000000000
+
+
+*/

@@ -12,7 +12,6 @@ Introducing obsidian Plugin, your essential translation tool within Obsidian! He
 
 Feel free to explore Bosidian Plugin and effortlessly navigate the world in its myriad languages with elegance and ease!
 
-
 ### Installing the plugin using BRAT
 
 1. Install the BRAT plugin
@@ -20,17 +19,17 @@ Feel free to explore Bosidian Plugin and effortlessly navigate the world in its 
     2. Disable safe mode, if enabled
     3. *Browse*, and search for "BRAT" 
     4. Install the latest version of **Obsidian 42 - BRAT**
-    5. 
-
+   
 
 ## Manually installing the plugin
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/simple-trnslate/`.
 
 
 ## How to Use it
 
-![[How-to-use-it.mp4]]
+<video controls src="https://github.com/Mohamed-khaled-mohmamed/simple-translate-2/assets/169333382/77604375-e458-41d5-9764-68c604e80468" type="video/mp4" width="600">
+</video>
 
 ## Customizing the Design
 
@@ -39,6 +38,9 @@ To customize the design, follow these steps:
 1. Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings#obsidian-style-settings-plugin) plugin.
 
 Now you're ready to personalize the design according to your preferences!
+
+
+
 
 
 <!-- 
@@ -68,8 +70,4 @@ If you have multiple URLs, you can also do:
 
 ## API Documentation
 
-See https://github.com/obsidianmd/obsidian-api -->
-# simple-translate
-# simple-translate
-# simple-translate
-# simple-translate-2
+
