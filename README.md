@@ -28,7 +28,7 @@ Feel free to explore Bosidian Plugin and effortlessly navigate the world in its 
 
 ## How to Use it
 
-<video controls src="/How-to-use-it.mp4" type="video/mp4" width="600">
+<video controls src="How-to-use-it.mp4" type="video/mp4" width="600">
 </video>
 
 ## Customizing the Design
