@@ -12,14 +12,6 @@ Introducing obsidian Plugin, your essential translation tool within Obsidian! He
 
 Feel free to explore Bosidian Plugin and effortlessly navigate the world in its myriad languages with elegance and ease!
 
-### Installing the plugin using BRAT
-
-1. Install the BRAT plugin
-    1. Open `Settings` -> `Community Plugins`
-    2. Disable safe mode, if enabled
-    3. *Browse*, and search for "BRAT" 
-    4. Install the latest version of **Obsidian 42 - BRAT**
-   
 
 ## Manually installing the plugin
 
@@ -28,7 +20,8 @@ Feel free to explore Bosidian Plugin and effortlessly navigate the world in its 
 
 ## How to Use it
 
-<video controls src="How-to-use-it.mp4" type="video/mp4" width="600">
+<video controls src="https://github.com/Mohamed-khaled-mohmamed/simple-translate/assets/169333382/496ef0e0-6cc1-4851-b494-96e378139fd4
+" type="video/mp4" width="600">
 </video>
 
 ## Customizing the Design
