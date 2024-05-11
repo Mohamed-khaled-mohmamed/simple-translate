@@ -71,3 +71,4 @@ If you have multiple URLs, you can also do:
 See https://github.com/obsidianmd/obsidian-api -->
 # simple-translate
 # simple-translate
+# simple-translate
