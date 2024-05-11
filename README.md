@@ -28,7 +28,7 @@ Feel free to explore Bosidian Plugin and effortlessly navigate the world in its 
 
 ## How to Use it
 
-<video controls src="https://github.com/Mohamed-khaled-mohmamed/simple-translate-2/assets/169333382/77604375-e458-41d5-9764-68c604e80468" type="video/mp4" width="600">
+<video controls src="/" type="video/mp4" width="600">
 </video>
 
 ## Customizing the Design
