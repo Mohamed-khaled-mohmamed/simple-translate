@@ -72,3 +72,4 @@ See https://github.com/obsidianmd/obsidian-api -->
 # simple-translate
 # simple-translate
 # simple-translate
+# simple-translate-2
